@@ -1,5 +1,9 @@
 -----------------For support, scripts, and more----------------
+<<<<<<< HEAD
 --------------- https://discord.gg/darksiderp  -------------
+=======
+--------------- https://discord.gg/wasabiscripts  -------------
+>>>>>>> 6f2c1090e2b4f052fbea18a912c493262f2e7886
 ---------------------------------------------------------------
 
 local curVersion = GetResourceMetadata(GetCurrentResourceName(), "version")
@@ -23,6 +27,7 @@ if Config.checkForUpdates then
         local repoVersion, repoURL, repoBody = GetRepoInformations()
 
         CreateThread(function()
+<<<<<<< HEAD
             -- Normalisation des versions pour éviter les erreurs de comparaison
             local normalizedCurVersion = tostring(curVersion):gsub("%s+", ""):lower()
             local normalizedRepoVersion = tostring(repoVersion):gsub("%s+", ""):lower()
@@ -41,6 +46,22 @@ if Config.checkForUpdates then
             end
         end)
     end
+=======
+            if curVersion ~= repoVersion then
+            Wait(4000)
+            print("^0[^3AVERTISSEMENT^0] " .. resourceName .. " n'est ^1PAS ^0à jour !")
+            print("^0[^3AVERTISSEMENT^0] Votre version : ^2" .. curVersion .. "^0")
+            print("^0[^3AVERTISSEMENT^0] Dernière version : ^2" .. repoVersion .. "^0")
+            print("^0[^3AVERTISSEMENT^0] Obtenez la dernière version ici : ^2" .. repoURL .. "^0")
+            print("^0[^3AVERTISSEMENT^0] Journal des modifications :^0")
+            print("^1" .. repoBody .. "^0")
+            else
+            Wait(4000)
+            print("^0[^2INFO^0] " .. resourceName .. " est à jour ! (^2" .. curVersion .. "^0)")
+            end
+        end)
+        end
+>>>>>>> 6f2c1090e2b4f052fbea18a912c493262f2e7886
 
     GetRepoInformations = function()
         local repoVersion, repoURL, repoBody = nil, nil, nil
@@ -49,6 +70,7 @@ if Config.checkForUpdates then
             if err == 200 then
                 local data = json.decode(response)
 
+<<<<<<< HEAD
                 -- Vérifiez si la version est valide
                 if data and data.tag_name and data.tag_name:match("^%d+%.%d+%.%d+$") then
                     repoVersion = data.tag_name
@@ -67,6 +89,14 @@ if Config.checkForUpdates then
                 repoVersion = curVersion -- Utilisez la version actuelle comme fallback
                 repoURL = "https://github.com/lotso0/Sell-shop"
                 repoBody = "Aucune information disponible."
+=======
+                repoVersion = data.tag_name
+                repoURL = data.html_url
+                repoBody = data.body
+            else
+                repoVersion = curVersion
+                repoURL = "https://github.com/lotso0/Sell-shop"
+>>>>>>> 6f2c1090e2b4f052fbea18a912c493262f2e7886
             end
         end, "GET")
 
